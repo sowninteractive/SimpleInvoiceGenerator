@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%234f46e5%27/%3E%3Cpath d=%27M10 8h8l5 5v11H10z%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.2%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
 <title>Never Lose It — Invoice &amp; Receipt Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
@@ -15,12 +16,15 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-se
 .lbl{display:block;font-size:.72rem;font-weight:600;color:#64748b;margin-bottom:.2rem}
 .dark .lbl{color:#94a3b8}
 .btn{display:inline-flex;align-items:center;gap:.4rem;border-radius:.5rem;padding:.45rem .8rem;font-size:.8rem;font-weight:600;border:1px solid #cbd5e1;background:#fff;color:#334155;transition:all .15s;cursor:pointer}
-.btn:hover{background:#f1f5f9}
+.btn:hover{background:#f1f5f9}.btn:active{transform:translateY(1px)}
+.btn:focus-visible,.ib:focus-visible,.sw:focus-visible,.seg button:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+.seg button{transition:background .15s,color .15s}.seg button:not(.on):hover{color:#0f172a}.dark .seg button:not(.on):hover{color:#fff}
 .dark .btn{background:#1e293b;border-color:#334155;color:#e2e8f0}.dark .btn:hover{background:#334155}
 .btn-p{background:#4f46e5;border-color:#4f46e5;color:#fff}.btn-p:hover{background:#4338ca}
 .dark .btn-p{background:#6366f1;border-color:#6366f1}.dark .btn-p:hover{background:#4f46e5}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:.9rem;padding:1rem}
 .dark .card{background:#0f172a;border-color:#1e293b}
+.card{box-shadow:0 1px 2px rgba(15,23,42,.05)}
 .card h2{font-size:.9rem;font-weight:700;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
 .ib{padding:.3rem;border-radius:.4rem;color:#64748b;cursor:pointer}.ib:hover{background:#e2e8f0;color:#0f172a}
 .dark .ib:hover{background:#334155;color:#fff}
@@ -34,22 +38,30 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-se
 .inv .hd.dk h1{color:#fff}
 .inv .muted{color:#64748b}.inv .pre{white-space:pre-line}
 .inv table{width:100%;border-collapse:collapse;margin:24px 0 8px}
-.inv th{text-align:left;font-size:11px;padding:9px 10px;background:var(--ac);color:#fff;font-weight:600}
-.inv td{padding:10px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+.inv th{text-align:left;font-size:11px;padding:9px 10px;background:var(--ac);color:var(--on,#fff);font-weight:600}
+.inv td{padding:11px 10px;border-bottom:1px solid #e2e8f0;vertical-align:top;overflow-wrap:anywhere}.inv .r{font-variant-numeric:tabular-nums}
 .inv .r{text-align:right}
 .inv .tot{margin-left:auto;width:290px}
 .inv .tot div{display:flex;justify-content:space-between;padding:5px 10px}
-.inv .gt{background:var(--ac);color:#fff;font-weight:700;font-size:16px;border-radius:6px;margin-top:6px}
+.inv .gt{background:var(--ac);color:var(--on,#fff);font-weight:700;font-size:16px;border-radius:6px;margin-top:6px}
 .inv.t-dark{--ac:#6366f1;--hb:#0f172a;--hf:#e2e8f0}
-.inv.t-dark .hd{border-bottom:5px solid #6366f1}
-.inv.t-exec{--ac:#1e3a5f;--hb:#fff;--hf:#1e3a5f;font-family:Georgia,"Times New Roman",serif}
-.inv.t-exec .hd{border-top:14px solid #1e3a5f;border-bottom:2px solid #b8923b}
+.inv.t-dark .hd{border-bottom:5px solid var(--ac)}
+.inv.t-exec{--ac:#1e3a5f;--hb:#fff;--hf:var(--ac);font-family:Georgia,"Times New Roman",serif}
+.inv.t-exec .hd{border-top:14px solid var(--ac);border-bottom:2px solid #111}
 .inv.t-exec h1{text-transform:uppercase;letter-spacing:.12em;font-size:28px;font-weight:700}
-.inv.t-exec th{background:#1e3a5f}.inv.t-exec .gt{background:#1e3a5f;border-bottom:3px solid #b8923b;border-radius:0}
-.inv.t-min th{background:transparent;color:#64748b;border-bottom:2px solid #0f172a}
-.inv.t-min .gt{background:transparent;color:#0f172a;border-top:2px solid #0f172a;border-radius:0}
-.inv.t-min h1{color:#0f172a;font-weight:300;font-size:36px}
+.inv.t-exec .gt{border-bottom:3px solid #111;border-radius:0}
+.inv.t-min{--ac:#0f172a}.inv.t-min th{background:transparent;color:#64748b;border-bottom:2px solid var(--ac)}
+.inv.t-min .gt{background:transparent;color:var(--ac);border-top:2px solid var(--ac);border-radius:0}
+.inv.t-min h1{color:var(--ac);font-weight:300;font-size:36px}
 .stamp{position:absolute;top:150px;right:60px;border:4px solid #16a34a;color:#16a34a;font-weight:800;font-size:28px;padding:2px 16px;border-radius:8px;transform:rotate(-12deg);opacity:.75}
+
+.sw{width:1.5rem;height:1.5rem;border-radius:9999px;border:2px solid #fff;box-shadow:0 0 0 1px #cbd5e1;transition:transform .12s}
+.sw:hover{transform:scale(1.12)}.sw.on{box-shadow:0 0 0 2px #4f46e5}
+.dark .sw{border-color:#0f172a}.dark .sw.on{box-shadow:0 0 0 2px #818cf8}
+#accent{width:2.2rem;height:1.75rem;padding:0;border:0;border-radius:.4rem;background:none;cursor:pointer}
+#wrap{overflow-x:hidden}
+@media(min-width:1024px){#wrap{max-height:calc(100vh - 5.5rem);overflow-y:auto}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 #toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;transition:all .25s;background:#0f172a;color:#fff;padding:.55rem 1rem;border-radius:.6rem;font-size:.82rem;z-index:50;pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%)}
 /* Minimal reset + hand-written utilities (replaces Tailwind) */
@@ -133,6 +145,10 @@ img,svg{display:block;max-width:100%}
         <div><label class="lbl">Currency</label><select class="fld" data-k="currency"></select></div>
         <div><label class="lbl">Issue date</label><input type="date" class="fld" data-k="issue"></div>
         <div><label class="lbl">Due date</label><input type="date" class="fld" data-k="due"></div>
+        <div class="col-span-2"><label class="lbl">Accent color</label>
+          <div class="flex flex-wrap items-center gap-2"><span id="swatches" class="flex flex-wrap items-center gap-2"></span>
+          <input type="color" id="accent" title="Pick a custom color" aria-label="Custom accent color">
+          <button class="btn !py-1" id="accentReset">Theme default</button></div></div>
       </div></div>
 
     <div class="card"><h2><i data-lucide="list" class="h-4 w-4 text-indigo-500"></i>Line items</h2>
@@ -178,7 +194,7 @@ const uid=()=>Math.random().toString(36).slice(2,9);
 const CUR=['USD','EUR','GBP','CAD','AUD','NZD','CHF','JPY','INR','MXN','BRL','SEK','NOK','DKK','SGD','ZAR','AED'];
 const today=(d=0)=>{const t=new Date();t.setDate(t.getDate()+d);return t.toISOString().slice(0,10)};
 const sample=()=>({
-  docType:'Invoice',theme:'min',number:'INV-0001',issue:today(),due:today(14),currency:'USD',
+  docType:'Invoice',theme:'min',accent:'',number:'INV-0001',issue:today(),due:today(14),currency:'USD',
   company:{name:'Northwind Studio',email:'hello@northwind.studio',taxId:'TAX-123456789',address:'42 Harbor Street\nSuite 5\nVancouver, BC V6B 1A1',logo:''},
   client:{name:'Acme Corporation',email:'billing@acme.com',address:'1200 Market Avenue\nSan Francisco, CA 94103'},
   items:[{id:uid(),desc:'Brand identity design',qty:1,price:2400},{id:uid(),desc:'Website design (5 pages)',qty:5,price:450},{id:uid(),desc:'Consulting (hours)',qty:6,price:95}],
@@ -206,11 +222,22 @@ function totals(){
   return{sub,disc,tax,total:sub-disc+tax};
 }
 
+const THEME_AC={min:'#0f172a',dark:'#6366f1',exec:'#1e3a5f'};
+const PRESETS=['#4f46e5','#0ea5e9','#10b981','#f59e0b','#ef4444','#ec4899','#92400e','#0f172a'];
+const validHex=c=>/^#[0-9a-f]{6}$/i.test(c||'');
+function onColor(h){const n=parseInt(h.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return(0.299*r+0.587*g+0.114*b)>160?'#0f172a':'#ffffff'}
+function shade(h){const n=parseInt(h.slice(1),16),m=[n>>16,(n>>8)&255,n&255],base=[11,16,32];return'#'+m.map((v,i)=>Math.round(v*.38+base[i]*.62).toString(16).padStart(2,'0')).join('')}
+const accStyle=()=>validHex(S.accent)?` style="--ac:${S.accent};--on:${onColor(S.accent)}${S.theme==='dark'?';--hb:'+shade(S.accent):''}"`:'';
+function accentUI(){
+  const cur=validHex(S.accent)?S.accent.toLowerCase():'';
+  $('#swatches').innerHTML=PRESETS.map(c=>`<button type="button" class="sw ${c===cur?'on':''}" data-c="${c}" style="background:${c}" title="${c}" aria-label="Accent ${c}"></button>`).join('');
+  $('#accent').value=cur||THEME_AC[S.theme];
+}
 function invoiceHTML(){
   const t=totals(),rec=S.docType==='Receipt',c=S.company,k=S.client;
   const dk=S.theme==='dark';
   const rows=S.items.map(i=>`<tr><td class="pre">${esc(i.desc)}</td><td class="r">${+i.qty||0}</td><td class="r">${money(+i.price)}</td><td class="r"><b>${money((+i.qty||0)*(+i.price||0))}</b></td></tr>`).join('');
-  return `<div class="inv t-${S.theme}" id="paper">
+  return `<div class="inv t-${S.theme}" id="paper"${accStyle()}>
   <div class="hd ${dk?'dk':''}">
     <div>${c.logo?`<img src="${esc(c.logo)}" crossorigin="anonymous" style="max-height:60px;max-width:200px;margin-bottom:10px;display:block" alt="">`:''}
       <div style="font-size:17px;font-weight:700">${esc(c.name)}</div>
@@ -266,7 +293,7 @@ function fillForm(){
   $$('[data-k]').forEach(el=>el.value=get(S,el.dataset.k)??'');
   $$('#docType button').forEach(b=>b.classList.toggle('on',b.dataset.v===S.docType));
   $$('#themes button').forEach(b=>b.classList.toggle('on',b.dataset.v===S.theme));
-  items();render();
+  items();accentUI();render();
 }
 function lists(){
   $('#clientSel').innerHTML='<option value="">Load saved client…</option>'+store.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
@@ -295,6 +322,9 @@ $('#addItem').onclick=()=>{S.items.push({id:uid(),desc:'',qty:1,price:0});items(
 $('#docType').onclick=e=>{const v=e.target.dataset.v;if(v){S.docType=v;fillForm()}};
 $('#themes').onclick=e=>{const v=e.target.dataset.v;if(v){S.theme=v;fillForm()}};
 $('#logoFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{S.company.logo=r.result;fillForm()};r.readAsDataURL(f);e.target.value=''};
+$('#swatches').onclick=e=>{const c=e.target.closest('[data-c]');if(c){S.accent=c.dataset.c;accentUI();render()}};
+$('#accent').oninput=e=>{S.accent=e.target.value;$('#swatches').querySelectorAll('.sw').forEach(b=>b.classList.toggle('on',b.dataset.c===S.accent.toLowerCase()));render()};
+$('#accentReset').onclick=()=>{S.accent='';accentUI();render()};
 $('#logoClear').onclick=()=>{S.company.logo='';fillForm()};
 $('#clientSel').onchange=e=>{const c=store.clients.find(x=>x.id===e.target.value);if(c){S.client={name:c.name,email:c.email,address:c.address};fillForm();toast('Client loaded')}};
 $('#saveClient').onclick=()=>{
