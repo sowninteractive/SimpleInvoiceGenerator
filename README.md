@@ -1,2 +1,22 @@
-# SimpleInvoiveGenerator
-A free, local-first invoice &amp; receipt generator running entirely in your browser.  Features:      Live preview &amp; auto-totals (tax, discounts)      PDF export &amp; 3 sleek themes      Invoice/Receipt modes (with PAID stamp)      Saved client profiles &amp; JSON backups 17 currencies + light/dark mode  No signup required—all data stays in localStorage.
+# Simple Invoice Generator
+
+A free invoice and receipt generator that runs entirely in your browser. Nothing is uploaded and there is no account to create.
+
+## Features
+- Live preview that updates as you type
+- Line items you can add, delete and reorder, with automatic subtotal, tax, discount and total
+- Invoice and Receipt modes (receipts get a "PAID" stamp)
+- Three themes: Minimal, Dark accent and Executive
+- One-click PDF download
+- Saved client profiles and reusable templates or drafts
+- Export and import your data as a `.json` backup
+- 17 currencies, plus light and dark mode
+
+## Use it
+Open `index.html` in a browser, or host the repo with GitHub Pages.
+
+## Privacy
+All data is stored in your browser's localStorage and never leaves your device. Export a backup now and then, because clearing site data erases it.
+
+## Built with
+Vanilla JavaScript, html2pdf.js and Lucide icons.
