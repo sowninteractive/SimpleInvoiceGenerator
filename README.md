@@ -14,6 +14,7 @@ A free invoice and receipt generator that runs entirely in your browser. Nothing
 
 ## Use it
 https://sowninteractive.github.io/SimpleInvoiveGenerator/
+
 Or run it locally by downloading the project and then Open `index.html` in a browser.
 
 ## Privacy
