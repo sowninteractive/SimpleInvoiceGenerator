@@ -13,7 +13,7 @@ A free invoice and receipt generator that runs entirely in your browser. Nothing
 - 17 currencies, plus light and dark mode
 
 ## Use it
-https://sowninteractive.github.io/SimpleInvoiveGenerator/
+https://sowninteractive.github.io/SimpleInvoiceGenerator/
 
 Or run it locally by downloading the project and then Open `index.html` in a browser.
 
